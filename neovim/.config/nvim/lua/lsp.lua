@@ -23,12 +23,10 @@ require("mason-lspconfig").setup({
     "ts_ls",
     "gopls",
     "clangd",
-    -- "golangci_lint_ls", no funca
   },
 })
 
 -- Customized on_attach function
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
@@ -87,9 +85,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Configure each language
--- How to add LSP for a specific language?
--- 1. use `:Mason` to install corresponding LSP
--- 2. add configuration below
 vim.lsp.config("pylsp", {})
 vim.lsp.config("lua_ls", {})
 vim.lsp.config("gopls", {
@@ -101,7 +96,6 @@ vim.lsp.config("gopls", {
     },
   },
 })
--- vim.lsp.config("eslint", {})
 vim.lsp.config("ts_ls", {
   settings = {
     typescript = {
@@ -113,5 +107,4 @@ vim.lsp.config("ts_ls", {
 })
 vim.lsp.config("clangd", {})
 
--- Enable them all at once
 vim.lsp.enable({ "pylsp", "lua_ls", "gopls", "ts_ls", "clangd" })

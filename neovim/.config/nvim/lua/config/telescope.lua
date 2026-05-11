@@ -1,7 +1,7 @@
 return {
 
     "nvim-telescope/telescope.nvim",
-    version = "*",
+    version = "0.2.*",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-live-grep-args.nvim",

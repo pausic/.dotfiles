@@ -1,14 +1,31 @@
 # .dotfiles
+
+Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
+
+## Packages
+
+| Package | Description |
+|---------|-------------|
+| aerospace | Tiling window manager |
+| brew-bundle | Homebrew dependencies |
+| git | Git config, signing keys, global ignore |
+| k9s | Kubernetes TUI |
+| neovim | Editor config (btw) |
+| sketchybar | macOS status bar |
+| starship | Shell prompt |
+| tmux | Terminal multiplexer |
+| zsh | Shell config (oh-my-zsh, fzf-tab, zoxide) |
+
 ## Usage
-`stow` is required to use the .dotfiles.
 
-Use each package with
+Requires [GNU Stow](https://www.gnu.org/software/stow/).
+
+Symlink all packages:
 ```sh
-stow aerospace brewfile git neovim sketchybar zsh
+stow aerospace brew-bundle git k9s neovim sketchybar starship tmux zsh
 ```
 
-To install dependencies, first run
+Install Homebrew dependencies:
 ```sh
-brew file update
+brew bundle --file=brew-bundle/Brewfile
 ```
-
