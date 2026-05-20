@@ -47,11 +47,5 @@ return {
       col = 1,
     },
 
-    on_attach = function(bufnr)
-      local gitsigns = require("gitsigns")
-      vim.keymap.set("n", "<leader>dd", function()
-        gitsigns.diffthis("master")
-      end, { buffer = bufnr, desc = "Diff against master" })
-    end,
   },
 }
