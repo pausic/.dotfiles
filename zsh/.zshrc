@@ -46,6 +46,7 @@ export EDITOR="nvim"
 alias k=kubectl
 alias nv=nvim
 alias oc=opencode
+alias f9s=flux9s
 
 # zsh 
 alias rl='source ~/.zshrc'
@@ -76,6 +77,26 @@ alias npmci='rm -rf node_modules/ package-lock.json && npm install'
 
 alias pullall='find . -type d -name .git -exec zsh -i -c "cd \"{}\"/../ && pwd && git checkout master && gu" \;'
 alias lport='netstat -Watnlv | grep LISTEN | awk '\''{ "ps -o comm= -p " $9 | getline procname; colred="\033[01;31m"; colclr="\033[0m"; print cred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname; }'\'' | column -t -s "|"'
+
+
+# Sesh
+
+function zs() {
+  sesh connect "$(
+    sesh list --icons | fzf-tmux -p 80%,70% \
+      --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+      --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+      --bind 'tab:down,btab:up' \
+      --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+      --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+      --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+      --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+      --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+      --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+      --preview-window 'right:55%' \
+      --preview 'sesh preview {}'
+  )"
+}
 
 
 ## Env Variables
