@@ -14,8 +14,16 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = ['exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=2.5']
 
-# Notify Sketchybar about workspace change
-exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE']
+# simple-bar
+on-focus-changed = [
+  "exec-and-forget osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"simple-bar-index-jsx\"'",
+]
+
+exec-on-workspace-change = [
+  '/bin/zsh',
+  '-c',
+  '/usr/bin/osascript -e "tell application id \"tracesOf.Uebersicht\" to refresh widget id \"simple-bar-index-jsx\""',
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -59,7 +67,7 @@ inner.horizontal = 5
 inner.vertical =   5
 outer.left =       5
 outer.bottom =     5
-outer.top =        [{monitor.'^built-in retina display$'= 2}, {monitor.'BenQ'= 33}, { monitor.main = 34}, 0] # SketchyBar safe-zone
+outer.top =        [{monitor.'^built-in retina display$'= 2}, {monitor.'BenQ'= 30}, { monitor.main = 30}, 0] # SketchyBar safe-zone
 outer.right =      5
 
 # 'main' binding mode declaration
@@ -108,24 +116,24 @@ alt-shift-l = 'move right'
 alt-shift-minus = 'resize smart -100'
 alt-shift-equal = 'resize smart +100'
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-1 = 'workspace 1_1'
-alt-2 = 'workspace 2_2'
-alt-3 = 'workspace 3_3'
-alt-4 = 'workspace 4_4'
-alt-q = 'workspace 5_5'
-alt-w = 'workspace 6_6'
-alt-e = 'workspace 7_7'
-alt-r = 'workspace 8_8'
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-q = 'workspace 5'
+alt-w = 'workspace 6'
+alt-e = 'workspace 7'
+alt-r = 'workspace 8'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-1 = 'move-node-to-workspace 1_1'
-alt-shift-2 = 'move-node-to-workspace 2_2'
-alt-shift-3 = 'move-node-to-workspace 3_3'
-alt-shift-4 = 'move-node-to-workspace 4_4'
-alt-shift-q = 'move-node-to-workspace 5_5'
-alt-shift-w = 'move-node-to-workspace 6_6'
-alt-shift-e = 'move-node-to-workspace 7_7'
-alt-shift-r = 'move-node-to-workspace 8_8'
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-q = 'move-node-to-workspace 5'
+alt-shift-w = 'move-node-to-workspace 6'
+alt-shift-e = 'move-node-to-workspace 7'
+alt-shift-r = 'move-node-to-workspace 8'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -154,18 +162,18 @@ alt-shift-l = ['join-with right', 'mode main']
 # Custom
 # Monitor config
 [workspace-to-monitor-force-assignment]
-2_2 = 'main'
-3_3 = 'main'
-1_1 = '^built-in retina display$'
-5_5 = '^built-in retina display$'
-4_4 = ['BenQ', '^built-in retina display$']
-8_8 = ['BenQ', '^built-in retina display$']
-6_6 = 'main'
-7_7 = 'main'
+2 = 'main'
+3 = 'main'
+1 = '^built-in retina display$'
+5 = '^built-in retina display$'
+4 = ['BenQ', '^built-in retina display$']
+8 = ['BenQ', '^built-in retina display$']
+6 = 'main'
+7 = 'main'
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = 'move-node-to-workspace 1_1'
+run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Picture-in-Picture' 
@@ -177,23 +185,23 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
-run = 'move-node-to-workspace 8_8'
+run = 'move-node-to-workspace 8'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
-run = ['layout floating', 'move-node-to-workspace 5_5']
+run = ['layout floating', 'move-node-to-workspace 5']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Music'
-run = 'move-node-to-workspace 4_4'
+run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = 'move-node-to-workspace 4_4'
+run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
-run = 'move-node-to-workspace 4_4'
+run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.QuickTimePlayerX'

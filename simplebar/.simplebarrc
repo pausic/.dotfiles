@@ -1,0 +1,289 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Jean-Tinland/simple-bar/refs/heads/master/lib/schemas/config.json",
+  "global": {
+    "theme": "dark",
+    "compactMode": true,
+    "floatingBar": false,
+    "noBarBg": true,
+    "noColorInData": false,
+    "bottomBar": false,
+    "sideDecoration": false,
+    "inlineSpacesOptions": false,
+    "disableAnimations": false,
+    "spacesBackgroundColorAsForeground": false,
+    "widgetsBackgroundColorAsForeground": false,
+    "widgetMaxWidth": "160px",
+    "slidingAnimationPace": 4,
+    "font": "GeistMono Nerd Font",
+    "fontSize": "12px",
+    "yabaiPath": "$(which yabai)",
+    "aerospacePath": "$(which aerospace)",
+    "windowManager": "aerospace",
+    "shell": "sh",
+    "terminal": "Terminal",
+    "disableNotifications": false,
+    "enableMissives": false,
+    "enableServer": false,
+    "serverSocketPort": 7777,
+    "yabaiServerRefresh": false,
+    "aerospaceServerRefresh": false
+  },
+  "themes": {
+    "lightTheme": "NightShiftLight",
+    "darkTheme": "MaterialOcean",
+    "colorMain": "",
+    "colorMainAlt": "",
+    "colorMinor": "",
+    "colorAccent": "",
+    "colorRed": "",
+    "colorGreen": "",
+    "colorYellow": "",
+    "colorOrange": "",
+    "colorBlue": "",
+    "colorMagenta": "",
+    "colorCyan": "",
+    "colorBlack": "",
+    "colorWhite": "",
+    "colorForeground": "",
+    "colorBackground": ""
+  },
+  "process": {
+    "showOnDisplay": "",
+    "displayForFocusedSpace": false,
+    "displayOnlyCurrent": false,
+    "centered": false,
+    "showCurrentSpaceMode": false,
+    "hideWindowTitle": true,
+    "displayOnlyIcon": true,
+    "expandAllProcesses": false,
+    "displaySkhdMode": false,
+    "displayStackIndex": false,
+    "displayOnlyCurrentStack": false
+  },
+  "spacesDisplay": {
+    "showOnDisplay": "",
+    "exclusions": "",
+    "titleExclusions": "",
+    "spacesExclusions": "",
+    "exclusionsAsRegex": false,
+    "displayAllSpacesOnAllScreens": false,
+    "hideDuplicateAppsInSpaces": false,
+    "displayStickyWindowsSeparately": false,
+    "hideCreateSpaceButton": false,
+    "hideEmptySpaces": true,
+    "showOptionsOnHover": true,
+    "switchSpacesWithoutYabai": false,
+    "customAeroSpaceDisplayIndexes": {}
+  },
+  "widgets": {
+    "processWidget": true,
+    "githubWidget": false,
+    "weatherWidget": true,
+    "netstatsWidget": true,
+    "cpuWidget": true,
+    "gpuWidget": false,
+    "memoryWidget": true,
+    "batteryWidget": true,
+    "wifiWidget": false,
+    "vpnWidget": false,
+    "zoomWidget": false,
+    "soundWidget": false,
+    "micWidget": false,
+    "dateWidget": true,
+    "timeWidget": true,
+    "keyboardWidget": false,
+    "spotifyWidget": true,
+    "cryptoWidget": false,
+    "stockWidget": false,
+    "youtubeMusicWidget": false,
+    "musicWidget": false,
+    "mpdWidget": false,
+    "browserTrackWidget": false,
+    "notificationsWidget": false,
+    "nextMeetingWidget": false
+  },
+  "githubWidgetOptions": {
+    "refreshFrequency": 600000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "hideWhenNoNotification": false,
+    "notificationUrl": "https://github.com/notifications",
+    "ghBinaryPath": "/opt/homebrew/bin/gh"
+  },
+  "weatherWidgetOptions": {
+    "refreshFrequency": 1800000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "unit": "C",
+    "hideLocation": true,
+    "hideGradient": false,
+    "customLocation": "Valencia"
+  },
+  "netstatsWidgetOptions": {
+    "refreshFrequency": 2000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "displayAsGraph": false,
+    "netstatsThreshold": 0
+  },
+  "cpuWidgetOptions": {
+    "refreshFrequency": 2000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "displayAsGraph": false,
+    "cpuUsageThreshold": 60,
+    "cpuMonitorApp": "Activity Monitor"
+  },
+  "gpuWidgetOptions": {
+    "refreshFrequency": 3000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "displayAsGraph": false,
+    "gpuMacmonBinaryPath": "/opt/homebrew/bin/macmon"
+  },
+  "memoryWidgetOptions": {
+    "refreshFrequency": 4000,
+    "showOnDisplay": "",
+    "showIcon": false,
+    "memoryUsageThreshold": 60,
+    "memoryMonitorApp": "Activity Monitor"
+  },
+  "batteryWidgetOptions": {
+    "refreshFrequency": 10000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "toggleCaffeinateOnClick": true,
+    "disableCaffeinateInvertedBackground": false,
+    "caffeinateOption": ""
+  },
+  "networkWidgetOptions": {
+    "refreshFrequency": 20000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "networkDevice": "en0",
+    "hideWifiIfDisabled": false,
+    "toggleWifiOnClick": false,
+    "hideNetworkName": true
+  },
+  "vpnWidgetOptions": {
+    "refreshFrequency": 8000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "vpnConnectionName": "",
+    "vpnShowConnectionName": false
+  },
+  "zoomWidgetOptions": {
+    "refreshFrequency": 5000,
+    "showOnDisplay": "",
+    "showVideo": true,
+    "showMic": true
+  },
+  "soundWidgetOptions": {
+    "refreshFrequency": 20000,
+    "showOnDisplay": "",
+    "showIcon": true
+  },
+  "micWidgetOptions": {
+    "refreshFrequency": 20000,
+    "showOnDisplay": "",
+    "showIcon": true
+  },
+  "dateWidgetOptions": {
+    "refreshFrequency": 30000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "shortDateFormat": true,
+    "locale": "en-UK",
+    "calendarApp": ""
+  },
+  "timeWidgetOptions": {
+    "refreshFrequency": 1000,
+    "showOnDisplay": "",
+    "showIcon": false,
+    "hour12": false,
+    "dayProgress": true,
+    "showSeconds": true
+  },
+  "keyboardWidgetOptions": {
+    "refreshFrequency": 20000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "keyboardMaxLength": 0
+  },
+  "cryptoWidgetOptions": {
+    "refreshFrequency": 300000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "denomination": "usd",
+    "identifiers": "bitcoin,ethereum,celo",
+    "precision": 5
+  },
+  "stockWidgetOptions": {
+    "refreshFrequency": 900000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "yahooFinanceApiKey": "YOUR_API_KEY",
+    "symbols": "AAPL,TSLA",
+    "showSymbol": true,
+    "showCurrency": true,
+    "showMarketPrice": true,
+    "showMarketChange": false,
+    "showMarketPercent": true,
+    "showColor": true
+  },
+  "spotifyWidgetOptions": {
+    "refreshFrequency": 10000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "showSpecter": true,
+    "showSpotifyMetadata": true
+  },
+  "youtubeMusicWidgetOptions": {
+    "refreshFrequency": 10000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "showSpecter": true,
+    "youtubeMusicPort": 26538
+  },
+  "musicWidgetOptions": {
+    "refreshFrequency": 10000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "showSpecter": true
+  },
+  "mpdWidgetOptions": {
+    "refreshFrequency": 10000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "showSpecter": true,
+    "mpdBinaryPath": "/opt/homebrew/bin/mpc",
+    "mpdPort": "6600",
+    "mpdHost": "127.0.0.1",
+    "mpdFormatString": "%title%[ - %artist%]|[%file%]"
+  },
+  "browserTrackWidgetOptions": {
+    "refreshFrequency": 10000,
+    "showOnDisplay": "",
+    "showIcon": true,
+    "showSpecter": true
+  },
+  "notificationsWidgetOptions": {
+    "refreshFrequency": 10000,
+    "showOnDisplay": "",
+    "excludedApps": ""
+  },
+  "nextMeetingWidgetOptions": {
+    "refreshFrequency": 60000,
+    "showOnDisplay": "",
+    "showJoinButton": true,
+    "showTimeOnly": false,
+    "icalBuddyPath": "",
+    "lookAheadHours": 12
+  },
+  "userWidgets": {
+    "userWidgetsList": {}
+  },
+  "customStyles": {
+    "styles": ":root {\n    /* Base */\n    --background: transparent\n    --main: #222222;\n    --main-alt: #2D2D2D;\n    --minor: #363537;\n    --foreground: #F7F1FF;\n    --black: #222222;\n    --white: #F7F1FF;\n\n    /* Palette */\n    --red:     #FC618D;\n    --orange:  #FD9353;\n    --yellow:  #FCE566;\n    --green:   #7BD88F;\n    --cyan:    #5AD4E6;\n    --blue:    #5AD4E6;\n    --magenta: #948AE3;\n\n    /* Accent — pick one: pink (default Spectrum), or swap to --yellow/--green */\n    --accent: #948AE3;\n    --accent-plain: #948AE3;\n\n    /* Bar shape */\n    --bar-height: 28px;\n    --bar-radius: 8px;\n    --bar-border: 0;\n    --bar-inner-margin: 6px;\n    --item-radius: 6px;\n    --item-inner-margin: 4px 8px;\n    --item-outer-margin: 0 3px;\n\n    /* Type */\n    --font: \"GeistMono Nerd Font\", \"SF Mono\", monospace;\n    --font-size: 11px;\n\n    /* Effects */\n    --hover-ring: 0 0 0 1px #948AE3 inset;\n    --focus-ring: 0 0 0 2px #FCE566 inset;\n    --light-shadow: 0 2px 6px rgba(0,0,0,0.35);\n    --foreground-shadow: 0 0 1px rgba(0,0,0,0.6);\n    --click-effect: rgba(247,241,255,0.12);\n    --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);\n    --transparent-dark: rgba(34,34,34,0.85);\n  }\n\n  /* Widget surface */\n  .simple-bar-data-widget,\n  .simple-bar [class*=\"data-widget\"] {\n    background: var(--main-alt);\n    color: var(--foreground);\n  }\n\n  /* Spaces */\n  .spaces__item--focused { background: var(--accent); color: var(--main); }\n  .spaces__item { color: var(--foreground); }\n\n  /* Process / window title */\n  .process { color: var(--yellow); }\n\n  /* Status accents */\n  .battery--low      { color: var(--red); }\n  .battery--charging { color: var(--green); }\n  .wifi--off         { color: var(--red); }\n  .mic--muted        { color: var(--red); }\n  .sound--muted      { color: var(--orange); }"
+  }
+}
