@@ -4,6 +4,6 @@ return {
     "nvim-lua/plenary.nvim",
   },
   keys = {
-    { "<leader>dd", "<cmd>DiffviewOpen origin/master<cr>", desc = "Diff against master" },
+    { "<leader>dd", "<cmd>DiffviewOpen<cr>", desc = "Diff uncommitted changes" },
   },
 }

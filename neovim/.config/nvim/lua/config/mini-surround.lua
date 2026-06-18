@@ -3,6 +3,9 @@ return {
   version = false,
   event = "VeryLazy",
   config = function()
+    -- vim `s` eat keystroke before `sa`/`sd`/`sr` reach mini.surround. no more. (`s` is just `cl`)
+    vim.keymap.set({ "n", "x" }, "s", "<Nop>")
+
     require("mini.surround").setup({
       search_method = "cover",
       n_lines = 10000,

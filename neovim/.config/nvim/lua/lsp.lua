@@ -64,30 +64,37 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", bufopts, { desc = "Go to declaration" }))
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", bufopts, { desc = "Go to definition" }))
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", bufopts, { desc = "Hover info" }))
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", bufopts, { desc = "Go to implementation" }))
+    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, vim.tbl_extend("force", bufopts, { desc = "Add workspace folder" }))
+    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, vim.tbl_extend("force", bufopts, { desc = "Remove workspace folder" }))
     vim.keymap.set("n", "<space>wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
+    end, vim.tbl_extend("force", bufopts, { desc = "List workspace folders" }))
+    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, vim.tbl_extend("force", bufopts, { desc = "Type definition" }))
     vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, vim.tbl_extend("force", bufopts, { desc = "Rename symbol" }))
-    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", bufopts, { desc = "Code action" }))
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", bufopts, { desc = "Find references" }))
     vim.keymap.set("n", "<space>y", function()
       vim.lsp.buf.format({ async = true })
-    end, bufopts)
+    end, vim.tbl_extend("force", bufopts, { desc = "Format file" }))
   end,
 })
 
+-- Add lsp-file-operations capabilities to all servers
+local lsp_caps = vim.tbl_deep_extend(
+  "force",
+  vim.lsp.protocol.make_client_capabilities(),
+  require("lsp-file-operations").default_capabilities()
+)
+
 -- Configure each language
-vim.lsp.config("pylsp", {})
-vim.lsp.config("lua_ls", {})
+vim.lsp.config("pylsp", { capabilities = lsp_caps })
+vim.lsp.config("lua_ls", { capabilities = lsp_caps })
 vim.lsp.config("gopls", {
+  capabilities = lsp_caps,
   settings = {
     gopls = {
       analyses = { unusedparams = true },
@@ -97,6 +104,7 @@ vim.lsp.config("gopls", {
   },
 })
 vim.lsp.config("ts_ls", {
+  capabilities = lsp_caps,
   settings = {
     typescript = {
       tsserver = {
@@ -105,6 +113,6 @@ vim.lsp.config("ts_ls", {
     },
   },
 })
-vim.lsp.config("clangd", {})
+vim.lsp.config("clangd", { capabilities = lsp_caps })
 
 vim.lsp.enable({ "pylsp", "lua_ls", "gopls", "ts_ls", "clangd" })

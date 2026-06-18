@@ -10,17 +10,38 @@ return {
     bigfile = { enabled = true },
     dashboard = {
       preset = {
-        pick = "telescope.nvim",
+        -- pick = "telescope.nvim", -- migrated to snacks.picker
         keys = {
-          { icon = " ", key = "f", desc = "Find File", action = ":Telescope find_files" },
-          { icon = " ", key = "r", desc = "Recent Files", action = ":Telescope oldfiles" },
-          { icon = " ", key = "g", desc = "Find Text", action = ":Telescope live_grep" },
+          {
+            icon = " ",
+            key = "f",
+            desc = "Find File",
+            action = function()
+              Snacks.picker.files()
+            end,
+          },
+          {
+            icon = " ",
+            key = "r",
+            desc = "Recent Files",
+            action = function()
+              Snacks.picker.recent()
+            end,
+          },
+          {
+            icon = " ",
+            key = "g",
+            desc = "Find Text",
+            action = function()
+              Snacks.picker.grep()
+            end,
+          },
           {
             icon = " ",
             key = "c",
             desc = "Config",
             action = function()
-              require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+              Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
             end,
           },
           { icon = " ", key = "s", desc = "Restore Session", section = "session" },
@@ -44,6 +65,16 @@ return {
         { section = "startup" },
       },
     },
+    gitbrowse = {
+      url_patterns = {
+        [".*"] = {
+          branch = "/tree/{branch}",
+          file = "/blob/{branch}/{file}#L{line_start}-L{line_end}",
+          permalink = "/blob/{commit}/{file}#L{line_start}-L{line_end}",
+          commit = "/commit/{commit}",
+        },
+      },
+    },
     indent = {
       animate = {
         duration = 2, -- ms per step
@@ -51,7 +82,7 @@ return {
         fps = 160, -- frames per second. Global setting for all animations
       },
     },
-    input = { enabled = true },
+    input = { enabled = false },
     lazygit = { configure = true },
     terminal = {
       win = {
@@ -59,7 +90,54 @@ return {
       },
       auto_insert = false,
     },
-    picker = { enabled = false },
+    picker = {
+      prompt = "",
+      enabled = true,
+      reverse = true,
+      layout = {
+        layout = {
+          box = "horizontal",
+          backdrop = false,
+          width = 0.8,
+          height = 0.9,
+          {
+            box = "vertical",
+            {
+              win = "list",
+              title = " Results ",
+              title_pos = "center",
+              border = "rounded",
+              wo = { winhighlight = "FloatBorder:NormalFloat" },
+            },
+            {
+              win = "input",
+              height = 1,
+              title_pos = "center",
+              border = "rounded",
+              wo = { winhighlight = "FloatBorder:NormalFloat" },
+            },
+          },
+          {
+            win = "preview",
+            title = "{preview:Preview}",
+            width = 0.45,
+            border = "rounded",
+            title_pos = "center",
+            wo = { winhighlight = "FloatBorder:NormalFloat" },
+          },
+        },
+      },
+      sources = {
+        files = {
+          hidden = true,
+          ignored = true,
+          exclude = { ".git/", "yarn.lock", "pnpm-lock.yaml", ".yarn/", "node_modules/", "dist/", "coverage/", ".jj/" },
+        },
+        grep = {
+          hidden = true,
+        },
+      },
+    },
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },

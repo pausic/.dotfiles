@@ -53,19 +53,18 @@ vim.keymap.set({ "n", "v" }, "<Del>", '"_x', { noremap = true, silent = true, de
 -- buffers
 vim.api.nvim_set_keymap("n", "<C-p>", ":bp<CR>", { noremap = true, silent = true, desc = "Previous buffer" })
 vim.api.nvim_set_keymap("n", "<C-n>", ":bn<CR>", { noremap = true, silent = true, desc = "Next buffer" })
-vim.api.nvim_set_keymap("n", "<Leader>c", ":bd<CR>", { noremap = true, silent = true, desc = "Close current buffer" })
+vim.api.nvim_set_keymap("n", "<Leader>x", ":bd<CR>", { noremap = true, silent = true, desc = "Close current buffer" })
 
--- telescope
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
-vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, { desc = "Telescope definitions" })
-vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "Telescope references" })
-vim.keymap.set("n", "<leader>ft", builtin.treesitter, { desc = "Telescope treesitter" })
-vim.keymap.set("n", "<leader>fs", builtin.git_status, { desc = "Telescope git_status" })
-vim.keymap.set("n", "<leader>fz", require("telescope").extensions.zoxide.list, { desc = "Telescope zoxide" })
+-- picker (snacks.picker)
+vim.keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find files" })
+vim.keymap.set("n", "<leader>fg", function() Snacks.picker.grep() end, { desc = "Live grep" })
+vim.keymap.set("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "Help tags" })
+vim.keymap.set("n", "<leader>fd", function() Snacks.picker.lsp_definitions() end, { desc = "LSP definitions" })
+vim.keymap.set("n", "<leader>fr", function() Snacks.picker.lsp_references() end, { desc = "LSP references" })
+vim.keymap.set("n", "<leader>ft", function() Snacks.picker.treesitter() end, { desc = "Treesitter symbols" })
+vim.keymap.set("n", "<leader>fs", function() Snacks.picker.git_status() end, { desc = "Git status" })
+vim.keymap.set("n", "<leader>fz", function() Snacks.picker.zoxide() end, { desc = "Zoxide" })
 
 -- navbuddy
 local navbuddy = require("nvim-navbuddy")
@@ -75,6 +74,10 @@ vim.keymap.set("n", "<leader>bc", navbuddy.open, { desc = "Open Navbuddy" })
 vim.keymap.set("t", "<Esc><Esc>", "<cmd>stopinsert<CR>", { desc = "Exit terminal mode" })
 
 --Snacks
+vim.keymap.set({ "n", "v" }, "<leader>ol", function()
+  Snacks.gitbrowse({ what = "file" })
+end, { desc = "Open line in repo" })
+
 vim.keymap.set("n", "<leader>lg", function()
   return Snacks.lazygit()
 end, { desc = "LazyGit" })
