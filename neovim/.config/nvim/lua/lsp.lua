@@ -28,10 +28,20 @@ require("mason-lspconfig").setup({
 
 -- Customized on_attach function
 local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "<space>d", vim.diagnostic.setloclist, opts)
+vim.keymap.set(
+  "n",
+  "<leader>e",
+  vim.diagnostic.open_float,
+  vim.tbl_extend("force", opts, { desc = "Diagnostics: float" })
+)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "Diagnostics: prev" }))
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "Diagnostics: next" }))
+vim.keymap.set(
+  "n",
+  "<leader>dl",
+  vim.diagnostic.setloclist,
+  vim.tbl_extend("force", opts, { desc = "Diagnostics: to loclist" })
+)
 
 vim.fn.sign_define("DiagnosticSignError", { text = "󰅚", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = "󰀪", texthl = "DiagnosticSignWarn" })
@@ -63,21 +73,53 @@ vim.api.nvim_create_autocmd("LspAttach", {
       navbuddy.attach(client, bufnr)
     end
 
+    if client.name == "eslint" then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        command = "LspEslintFixAll",
+      })
+    end
+
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", bufopts, { desc = "Go to declaration" }))
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", bufopts, { desc = "Go to definition" }))
     vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", bufopts, { desc = "Hover info" }))
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", bufopts, { desc = "Go to implementation" }))
-    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, vim.tbl_extend("force", bufopts, { desc = "Add workspace folder" }))
-    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, vim.tbl_extend("force", bufopts, { desc = "Remove workspace folder" }))
-    vim.keymap.set("n", "<space>wl", function()
+    vim.keymap.set(
+      "n",
+      "gi",
+      vim.lsp.buf.implementation,
+      vim.tbl_extend("force", bufopts, { desc = "Go to implementation" })
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>Wa",
+      vim.lsp.buf.add_workspace_folder,
+      vim.tbl_extend("force", bufopts, { desc = "Add workspace folder" })
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>Wr",
+      vim.lsp.buf.remove_workspace_folder,
+      vim.tbl_extend("force", bufopts, { desc = "Remove workspace folder" })
+    )
+    vim.keymap.set("n", "<leader>Wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, vim.tbl_extend("force", bufopts, { desc = "List workspace folders" }))
-    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, vim.tbl_extend("force", bufopts, { desc = "Type definition" }))
-    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, vim.tbl_extend("force", bufopts, { desc = "Rename symbol" }))
-    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", bufopts, { desc = "Code action" }))
+    vim.keymap.set(
+      "n",
+      "<leader>D",
+      vim.lsp.buf.type_definition,
+      vim.tbl_extend("force", bufopts, { desc = "Type definition" })
+    )
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", bufopts, { desc = "Rename symbol" }))
+    vim.keymap.set(
+      "n",
+      "<leader>ca",
+      vim.lsp.buf.code_action,
+      vim.tbl_extend("force", bufopts, { desc = "Code action" })
+    )
     vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", bufopts, { desc = "Find references" }))
-    vim.keymap.set("n", "<space>y", function()
+    vim.keymap.set("n", "<leader>y", function()
       vim.lsp.buf.format({ async = true })
     end, vim.tbl_extend("force", bufopts, { desc = "Format file" }))
   end,
@@ -87,6 +129,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 local lsp_caps = vim.tbl_deep_extend(
   "force",
   vim.lsp.protocol.make_client_capabilities(),
+  require("cmp_nvim_lsp").default_capabilities(),
   require("lsp-file-operations").default_capabilities()
 )
 
@@ -115,4 +158,9 @@ vim.lsp.config("ts_ls", {
 })
 vim.lsp.config("clangd", { capabilities = lsp_caps })
 
-vim.lsp.enable({ "pylsp", "lua_ls", "gopls", "ts_ls", "clangd" })
+vim.lsp.config("eslint", {
+  capabilities = lsp_caps,
+  filetypes = { "typescript", "typescriptreact" },
+})
+
+vim.lsp.enable({ "pylsp", "lua_ls", "gopls", "ts_ls", "clangd", "eslint" })

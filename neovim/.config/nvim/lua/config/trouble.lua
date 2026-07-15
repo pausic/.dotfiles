@@ -49,10 +49,11 @@ return {
   },
   cmd = "Trouble",
   keys = {
-    {
-      "<leader>xx",
-      "<cmd>Trouble diagnostics toggle<cr>",
-      desc = "Diagnostics (Trouble)",
-    },
+    { "<leader>Td", "<cmd>Trouble diagnostics toggle focus=true<cr>", desc = "Diagnostics (Trouble)" },
+    { "<leader>TD", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+    { "<leader>Ts", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
+    { "<leader>Tr", "<cmd>Trouble lsp toggle<cr>", desc = "LSP Definitions / References (Trouble)" },
+    { "<leader>Tl", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+    { "<leader>Tq", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
   },
 }

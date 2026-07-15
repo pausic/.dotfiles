@@ -40,8 +40,12 @@ return {
               TelescopePrompt = "Telescope",
             }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
 
-            -- Automatically updates active buffer color to match color of other components (will be overidden if buffers_color is set)
+            -- bg highlight is invisible under transparent_background; use fg + bold instead
             use_mode_colors = false,
+            buffers_color = {
+              active = { fg = "#f7f1ff" }, -- spectrum text white, bold = current buffer
+              inactive = { fg = "#69676c" }, -- dim grey = other buffers
+            },
 
             symbols = {
               modified = " ●", -- Text to show when the buffer is modified

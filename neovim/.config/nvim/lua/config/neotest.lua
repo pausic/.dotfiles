@@ -29,7 +29,7 @@ return {
             },
         })
 
-        vim.keymap.set("n", "<leader>et", function() neotest.output_panel.toggle() end, { desc = "Neotest output panel" })
+        vim.keymap.set("n", "<leader>Nt", function() neotest.output_panel.toggle() end, { desc = "Neotest output panel" })
 
         local test_patterns = {
             "*_test.go",

@@ -7,7 +7,7 @@ return {
     vim.keymap.set({ "n", "x" }, "s", "<Nop>")
 
     require("mini.surround").setup({
-      search_method = "cover",
+      search_method = "cover_or_next",
       n_lines = 10000,
       mappings = {
         add = "sa",
@@ -17,9 +17,6 @@ return {
         highlight = "sh",
         replace = "sr",
         update_n_lines = "sn",
-
-        suffix_last = "l",
-        suffix_next = "n",
       },
     })
   end,

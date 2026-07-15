@@ -1,6 +1,16 @@
 return {
   "stevearc/conform.nvim",
   event = { "BufReadPre", "BufNewFile" },
+  keys = {
+    {
+      "<leader>pf",
+      function()
+        require("conform").format({ lsp_format = "fallback", async = false, timeout_ms = 3000 })
+      end,
+      mode = { "n", "v" },
+      desc = "Format file or range (in visual mode)",
+    },
+  },
   config = function()
     local conform = require("conform")
 
@@ -16,7 +26,6 @@ return {
         typescriptreact = { "prettierd" },
         json = { "jq" },
         graphql = { "prettierd" },
-        java = { "google-java-format" },
         kotlin = { "ktlint" },
         markdown = { "prettierd" },
         html = { "prettierd" },
@@ -25,21 +34,13 @@ return {
         yaml = { "yamlfmt" },
         toml = { "taplo" },
         css = { "prettierd" },
-        dart = { "prettierd" },
+        dart = { "dart_format" },
       },
       format_on_save = {
         lsp_format = "fallback",
         async = false,
-        timeout_ms = 500,
+        timeout_ms = 3000,
       },
     })
-
-    vim.keymap.set({ "n", "v" }, "<leader>pf", function()
-      conform.format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 500,
-      })
-    end, { desc = "Format file or range (in visual mode)" })
   end,
 }

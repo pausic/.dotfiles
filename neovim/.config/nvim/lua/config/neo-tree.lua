@@ -34,6 +34,14 @@ return {
       window = {
         position = "right",
         width = 60,
+        mappings = {
+          ["Y"] = function(state)
+            local node = state.tree:get_node()
+            local rel = vim.fn.fnamemodify(node.path, ":.")
+            vim.fn.setreg("+", rel)
+            vim.notify("Copied: " .. rel)
+          end,
+        },
       },
       filters = {},
     })

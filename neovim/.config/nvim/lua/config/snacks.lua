@@ -66,6 +66,22 @@ return {
       },
     },
     gitbrowse = {
+      -- Owns the full list (snacks replaces, no append). Generic `user@host`
+      -- rules run first in the gsub pipeline -> any SSH user (git@, *@ghe.com).
+      -- stylua: ignore
+      remote_patterns = {
+        { "^(https?://.*)%.git$",               "%1" },
+        { "^[%w%.%-_]+@(.+):(.+)%.git$",        "https://%1/%2" }, -- user@host:path.git
+        { "^[%w%.%-_]+@(.+):(.+)$",             "https://%1/%2" }, -- user@host:path
+        { "^[%w%.%-_]+@(.+)/(.+)$",             "https://%1/%2" }, -- user@host/path (slash form)
+        { "^ssh://git@(.*)$",                   "https://%1" },
+        { "^ssh://([^:/]+)(:%d+)/(.*)$",        "https://%1/%3" },
+        { "^ssh://([^/]+)/(.*)$",               "https://%1/%2" },
+        { "ssh%.dev%.azure%.com/v3/(.*)/(.*)$", "dev.azure.com/%1/_git/%2" },
+        { "^https://%w*@(.*)",                  "https://%1" },
+        { ":%d+",                               "" },
+        { "%.git$",                             "" },
+      },
       url_patterns = {
         [".*"] = {
           branch = "/tree/{branch}",
@@ -83,7 +99,11 @@ return {
       },
     },
     input = { enabled = false },
-    lazygit = { configure = true },
+    lazygit = {
+      configure = true,
+      start_insert = true,
+      auto_insert = true,
+    },
     terminal = {
       win = {
         wo = { winbar = "" },
@@ -143,7 +163,7 @@ return {
     scope = { enabled = true },
     scroll = {
       animate = {
-        duration = { step = 5, total = 250 },
+        duration = { step = 5, total = 100 },
         easing = "linear",
       },
       -- faster animation when repeating scroll after delay

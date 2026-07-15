@@ -1,6 +1,7 @@
 return {
   -- Autocompletion
   "hrsh7th/nvim-cmp",
+  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
     {
@@ -20,11 +21,15 @@ return {
 
     -- Adds a number of user-friendly snippets
     "rafamadriz/friendly-snippets",
+
+    -- VSCode-like pictograms in the completion menu
+    "onsails/lspkind.nvim",
   },
   config = function()
     -- nvim-cmp setup
     local cmp = require("cmp")
     local luasnip = require("luasnip")
+    local lspkind = require("lspkind")
     require("luasnip.loaders.from_vscode").lazy_load()
     luasnip.config.setup({})
 
@@ -67,6 +72,13 @@ return {
       sources = {
         { name = "nvim_lsp" },
         { name = "luasnip" },
+      },
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = "symbol_text",
+          maxwidth = 50,
+          ellipsis_char = "...",
+        }),
       },
     })
     -- `/` cmdline setup.
