@@ -17,7 +17,7 @@
     "font": "GeistMono Nerd Font",
     "fontSize": "12px",
     "yabaiPath": "$(which yabai)",
-    "aerospacePath": "$(which aerospace)",
+    "aerospacePath": "/opt/homebrew/bin/aerospace",
     "windowManager": "aerospace",
     "shell": "sh",
     "terminal": "Terminal",
@@ -71,7 +71,7 @@
     "displayStickyWindowsSeparately": false,
     "hideCreateSpaceButton": false,
     "hideEmptySpaces": true,
-    "showOptionsOnHover": true,
+    "showOptionsOnHover": false,
     "switchSpacesWithoutYabai": false,
     "customAeroSpaceDisplayIndexes": {}
   },
