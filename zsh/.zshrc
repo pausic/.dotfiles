@@ -98,6 +98,14 @@ function zs() {
   )"
 }
 
+function cb() {
+  if [[ $# -eq 0 ]]; then
+    pbcopy
+  else
+    pbcopy < "$1"
+  fi
+}
+
 
 ## Env Variables
 
