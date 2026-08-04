@@ -1,5 +1,7 @@
 return {
     "nvim-neotest/neotest",
+    -- Disabled // Very troublesome
+    enabled = false,
     dependencies = {
         "nvim-neotest/nvim-nio",
         "nvim-lua/plenary.nvim",
@@ -12,9 +14,20 @@ return {
     event = "VeryLazy",
     config = function()
         local neotest = require("neotest")
+
+        -- Ignore Ginkgo suites: specs are closures, so they collapse into a
+        -- single RunSpecs node that boots envtest when run.
+        local golang = require("neotest-golang")({})
+        local is_test = golang.is_test_file
+        golang.is_test_file = function(path)
+            if not is_test(path) then return false end
+            local ok, lines = pcall(vim.fn.readfile, path, "", 40)
+            return not (ok and table.concat(lines):find("onsi/ginkgo", 1, true))
+        end
+
         neotest.setup({
             adapters = {
-                require("neotest-golang")({}),
+                golang,
                 -- Inline is broken
                 -- require("neotest-jest")({
                 --     jestCommand = "npm test --",

@@ -27,3 +27,12 @@ vim.opt.smartcase = true -- but make it case sensitive if an uppercase is entere
 
 vim.opt.smartindent = true
 vim.opt.swapfile = false
+
+-- Diff
+vim.opt.diffopt:append({
+  "algorithm:histogram",
+  "indent-heuristic",
+  "linematch:200",
+  "vertical",
+})
+vim.opt.fillchars:append({ diff = "╱" })

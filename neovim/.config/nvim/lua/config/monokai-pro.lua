@@ -20,6 +20,13 @@ return {
       override = function()
         return {
           Visual = { bg = "#555555" },
+
+          -- Diff colors
+          DiffAdd = { bg = "#1f3320", fg = "NONE" },
+          DiffDelete = { bg = "#3d1f1f", fg = "NONE" },
+          DiffviewDiffDeleteDim = { bg = "NONE", fg = "#302f31" },
+          DiffChange = { bg = "#1f2b33", fg = "NONE" },
+          DiffText = { bg = "#2e4d5c", fg = "NONE", bold = true },
         }
       end,
       -- Enable this will disable filter option

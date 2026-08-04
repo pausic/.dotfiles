@@ -6,4 +6,7 @@ return {
   keys = {
     { "<leader>dd", "<cmd>DiffviewOpen<cr>", desc = "Diff uncommitted changes" },
   },
+  opts = {
+    enhanced_diff_hl = true,
+  },
 }
